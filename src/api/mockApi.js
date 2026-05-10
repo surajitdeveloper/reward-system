@@ -24,9 +24,10 @@ const simulateDelay = (ms = API_DELAY_MS) =>
  * @returns {Promise<any>}
  */
 const fetchJson = async (path) => {
-  const response = await fetch(path);
+  const fullPath = path.startsWith('/') ? `${process.env.PUBLIC_URL}${path}` : path;
+  const response = await fetch(fullPath);
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: Unable to fetch ${path}`);
+    throw new Error(`HTTP ${response.status}: Unable to fetch ${fullPath}`);
   }
   return response.json();
 };
@@ -43,7 +44,7 @@ const fetchJson = async (path) => {
  * @returns {Promise<{ token: string, user: Object }>}
  */
 export const loginApi = async (username, password) => {
-  logger.apiCall('/api/auth/login', { username });
+  logger.apiCall(`${process.env.PUBLIC_URL}/api/auth/login`, { username });
   await simulateDelay();
 
   if (
@@ -58,7 +59,7 @@ export const loginApi = async (username, password) => {
         username: MOCK_ADMIN.username,
       },
     };
-    logger.apiResponse('/api/auth/login', result);
+    logger.apiResponse(`${process.env.PUBLIC_URL}/api/auth/login`, result);
     return result;
   }
 
@@ -73,12 +74,12 @@ export const loginApi = async (username, password) => {
  * @returns {Promise<Array>}
  */
 export const fetchUsersApi = async () => {
-  logger.apiCall('/api/users');
+  logger.apiCall(`${process.env.PUBLIC_URL}/api/users`);
   await simulateDelay();
 
   try {
-    const data = await fetchJson(`${process.env.PUBLIC_URL}/data/users.json`);
-    logger.apiResponse('/api/users', `Fetched ${data.length} users`);
+    const data = await fetchJson('/data/users.json');
+    logger.apiResponse(`${process.env.PUBLIC_URL}/api/users`, `Fetched ${data.length} users`);
     return data;
   } catch (err) {
     logger.error('fetchUsersApi failed:', err.message);
@@ -93,12 +94,12 @@ export const fetchUsersApi = async () => {
  * @returns {Promise<Array>}
  */
 export const fetchTransactionsApi = async () => {
-  logger.apiCall('/api/transactions');
+  logger.apiCall(`${process.env.PUBLIC_URL}/api/transactions`);
   await simulateDelay();
 
   try {
-    const data = await fetchJson(`${process.env.PUBLIC_URL}/data/transactions.json`);
-    logger.apiResponse('/api/transactions', `Fetched ${data.length} customer records`);
+    const data = await fetchJson('/data/transactions.json');
+    logger.apiResponse(`${process.env.PUBLIC_URL}/api/transactions`, `Fetched ${data.length} customer records`);
     return data;
   } catch (err) {
     logger.error('fetchTransactionsApi failed:', err.message);
@@ -112,11 +113,11 @@ export const fetchTransactionsApi = async () => {
  * @returns {Promise<Object>} Customer transaction record
  */
 export const fetchCustomerTransactionsApi = async (customerId) => {
-  logger.apiCall(`/api/transactions/${customerId}`);
+  logger.apiCall(`${process.env.PUBLIC_URL}/api/transactions/${customerId}`);
   await simulateDelay();
 
   try {
-    const data = await fetchJson(`${process.env.PUBLIC_URL}/data/transactions.json`);
+    const data = await fetchJson('/data/transactions.json');
     const customerData = data.find((c) => c.customerId === customerId);
 
     if (!customerData) {
@@ -124,7 +125,7 @@ export const fetchCustomerTransactionsApi = async (customerId) => {
       return null;
     }
 
-    logger.apiResponse(`/api/transactions/${customerId}`, customerData);
+    logger.apiResponse(`${process.env.PUBLIC_URL}/api/transactions/${customerId}`, customerData);
     return customerData;
   } catch (err) {
     logger.error('fetchCustomerTransactionsApi failed:', err.message);
