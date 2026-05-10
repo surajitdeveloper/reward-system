@@ -160,5 +160,32 @@
     "phone": "+1-555-0118",
     "joinDate": "2024-11-01",
     "tier": "Bronze"
+  },
+  {
+    "id": 19,
+    "customerId": "C019",
+    "customerName": "Sarah Young",
+    "email": "sarah.young@example.com",
+    "phone": "+1-555-0119",
+    "joinDate": "2024-12-01",
+    "tier": "Bronze"
+  },
+  {
+    "id": 20,
+    "customerId": "C020",
+    "customerName": "Tom Baker",
+    "email": "tom.baker@example.com",
+    "phone": "+1-555-0120",
+    "joinDate": "2025-01-15",
+    "tier": "Silver"
+  },
+  {
+    "id": 21,
+    "customerId": "C021",
+    "customerName": "Ursula Vance",
+    "email": "ursula.vance@example.com",
+    "phone": "+1-555-0121",
+    "joinDate": "2025-02-10",
+    "tier": "Gold"
   }
 ]

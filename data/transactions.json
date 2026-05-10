@@ -207,5 +207,23 @@
       { "transactionId": "T082", "amount": 49.00,  "date": "2025-02-23" },
       { "transactionId": "T083", "amount": 50.00,  "date": "2025-03-14" }
     ]
+  },
+  {
+    "customerId": "C019",
+    "customerName": "Sarah Young",
+    "email": "sarah.young@example.com",
+    "transactions": []
+  },
+  {
+    "customerId": "C020",
+    "customerName": "Tom Baker",
+    "email": "tom.baker@example.com",
+    "transactions": []
+  },
+  {
+    "customerId": "C021",
+    "customerName": "Ursula Vance",
+    "email": "ursula.vance@example.com",
+    "transactions": []
   }
 ]
