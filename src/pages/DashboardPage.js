@@ -19,10 +19,10 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from 'recharts';
-import useTransactions from '../../hooks/useTransactions';
-import useCustomers from '../../hooks/useCustomers';
-import { calculateTotalPoints } from '../../utils/rewardCalculator';
-import { CHART_COLORS } from '../../constants/appConstants';
+import useTransactions from '../hooks/useTransactions';
+import useCustomers from '../hooks/useCustomers';
+import { calculateTotalPoints } from '../utils/rewardCalculator';
+import { CHART_COLORS } from '../constants/appConstants';
 
 // ─── Stat Card Sub-component ───────────────────────────────────────────────────
 const StatCard = ({ title, value, icon, color }) => (

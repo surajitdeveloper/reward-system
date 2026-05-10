@@ -67,6 +67,23 @@ src/
    npm test
    ```
 
+## 🧩 Component Details
+
+### Core Components
+- **Navbar**: Main header with app logo, title, and logout functionality.
+- **Sidebar**: Collapsible navigation drawer for easy page switching.
+- **MainLayout**: Higher-order component providing the consistent structure for authenticated pages.
+
+### Customer Components
+- **CustomerTable**: Features sorting (by Name, ID, Points), pagination, and real-time search filtering.
+- **CustomerRow**: Uses MUI `Collapse` to show/hide a transaction summary for a better UX on large datasets.
+- **TransactionRow**: Displays individual transaction details with color-coded point chips.
+- **CustomerDetailsDialog**: A comprehensive "drill-down" view that calculates and displays rewards by month for the selected customer.
+
+### Logic & Utilities
+- **rewardCalculator**: The brain of the app. Handles whole and fractional numbers. Floors fractional dollars for point calculations to ensure conservative awarding.
+- **logger**: Custom utility providing structured logging for API calls and responses in the browser console.
+
 ## 🔑 Login Credentials
 - **Username:** `admin`
 - **Password:** `admin123`

@@ -33,11 +33,9 @@ import { formatDate, getMonthLabel, sortYearMonths } from '../../utils/dateUtils
 import { NO_TRANSACTIONS_LABEL, DEFAULT_RECENT_MONTHS } from '../../constants/appConstants';
 
 const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
-  if (!customer) return null;
-
   // Process data for display
   const processedData = useMemo(() => {
-    if (!transactions || transactions.length === 0) return null;
+    if (!customer || !transactions || transactions.length === 0) return null;
 
     // By default, filter to recent 3 months as per requirement
     const recentTxns = filterRecentMonths(transactions, DEFAULT_RECENT_MONTHS);
@@ -46,7 +44,9 @@ const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
     const totalPoints = calculateTotalPoints(recentTxns);
 
     return { months, monthlyGroups, totalPoints, recentTxns };
-  }, [transactions]);
+  }, [customer, transactions]);
+
+  if (!customer) return null;
 
   return (
     <Dialog 
