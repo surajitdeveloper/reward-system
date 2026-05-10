@@ -67,6 +67,11 @@ src/
    npm test
    ```
 
+5. **Deploy to GitHub Pages:**
+   ```bash
+   npm run deploy
+   ```
+
 ## 🧩 Component Details
 
 ### Core Components

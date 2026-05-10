@@ -71,7 +71,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             {/* Public Routes */}
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
