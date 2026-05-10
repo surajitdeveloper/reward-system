@@ -1,0 +1,211 @@
+[
+  {
+    "customerId": "C001",
+    "customerName": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "transactions": [
+      { "transactionId": "T001", "amount": 120.00, "date": "2025-01-15" },
+      { "transactionId": "T002", "amount": 75.50,  "date": "2025-01-28" },
+      { "transactionId": "T003", "amount": 210.00, "date": "2025-02-10" },
+      { "transactionId": "T004", "amount": 45.00,  "date": "2025-02-22" },
+      { "transactionId": "T005", "amount": 180.75, "date": "2025-03-05" },
+      { "transactionId": "T006", "amount": 60.00,  "date": "2025-03-18" }
+    ]
+  },
+  {
+    "customerId": "C002",
+    "customerName": "Bob Williams",
+    "email": "bob.williams@example.com",
+    "transactions": [
+      { "transactionId": "T007", "amount": 95.00,  "date": "2025-01-10" },
+      { "transactionId": "T008", "amount": 130.00, "date": "2025-01-25" },
+      { "transactionId": "T009", "amount": 55.50,  "date": "2025-02-08" },
+      { "transactionId": "T010", "amount": 220.00, "date": "2025-02-20" },
+      { "transactionId": "T011", "amount": 88.00,  "date": "2025-03-12" },
+      { "transactionId": "T012", "amount": 145.25, "date": "2025-03-28" }
+    ]
+  },
+  {
+    "customerId": "C003",
+    "customerName": "Carol Davis",
+    "email": "carol.davis@example.com",
+    "transactions": [
+      { "transactionId": "T013", "amount": 300.00, "date": "2025-01-05" },
+      { "transactionId": "T014", "amount": 50.00,  "date": "2025-01-20" },
+      { "transactionId": "T015", "amount": 175.00, "date": "2025-02-14" },
+      { "transactionId": "T016", "amount": 99.99,  "date": "2025-03-01" },
+      { "transactionId": "T017", "amount": 250.50, "date": "2025-03-20" }
+    ]
+  },
+  {
+    "customerId": "C004",
+    "customerName": "David Martinez",
+    "email": "david.martinez@example.com",
+    "transactions": [
+      { "transactionId": "T018", "amount": 40.00,  "date": "2025-01-12" },
+      { "transactionId": "T019", "amount": 160.00, "date": "2025-01-30" },
+      { "transactionId": "T020", "amount": 85.75,  "date": "2025-02-05" },
+      { "transactionId": "T021", "amount": 115.00, "date": "2025-02-25" },
+      { "transactionId": "T022", "amount": 200.00, "date": "2025-03-10" },
+      { "transactionId": "T023", "amount": 72.50,  "date": "2025-03-25" }
+    ]
+  },
+  {
+    "customerId": "C005",
+    "customerName": "Emma Wilson",
+    "email": "emma.wilson@example.com",
+    "transactions": [
+      { "transactionId": "T024", "amount": 500.00, "date": "2025-01-08" },
+      { "transactionId": "T025", "amount": 65.00,  "date": "2025-02-15" },
+      { "transactionId": "T026", "amount": 320.00, "date": "2025-03-22" }
+    ]
+  },
+  {
+    "customerId": "C006",
+    "customerName": "Frank Thompson",
+    "email": "frank.thompson@example.com",
+    "transactions": [
+      { "transactionId": "T027", "amount": 78.00,  "date": "2025-01-18" },
+      { "transactionId": "T028", "amount": 140.00, "date": "2025-02-03" },
+      { "transactionId": "T029", "amount": 90.25,  "date": "2025-02-28" },
+      { "transactionId": "T030", "amount": 195.00, "date": "2025-03-15" }
+    ]
+  },
+  {
+    "customerId": "C007",
+    "customerName": "Grace Lee",
+    "email": "grace.lee@example.com",
+    "transactions": [
+      { "transactionId": "T031", "amount": 110.00, "date": "2025-01-22" },
+      { "transactionId": "T032", "amount": 55.00,  "date": "2025-01-31" },
+      { "transactionId": "T033", "amount": 230.00, "date": "2025-02-18" },
+      { "transactionId": "T034", "amount": 67.50,  "date": "2025-03-07" },
+      { "transactionId": "T035", "amount": 145.00, "date": "2025-03-28" }
+    ]
+  },
+  {
+    "customerId": "C008",
+    "customerName": "Henry Brown",
+    "email": "henry.brown@example.com",
+    "transactions": [
+      { "transactionId": "T036", "amount": 30.00,  "date": "2025-01-14" },
+      { "transactionId": "T037", "amount": 105.00, "date": "2025-02-09" },
+      { "transactionId": "T038", "amount": 165.75, "date": "2025-02-24" },
+      { "transactionId": "T039", "amount": 48.00,  "date": "2025-03-11" },
+      { "transactionId": "T040", "amount": 280.00, "date": "2025-03-29" }
+    ]
+  },
+  {
+    "customerId": "C009",
+    "customerName": "Isabella Garcia",
+    "email": "isabella.garcia@example.com",
+    "transactions": [
+      { "transactionId": "T041", "amount": 125.00, "date": "2025-01-06" },
+      { "transactionId": "T042", "amount": 92.00,  "date": "2025-01-26" },
+      { "transactionId": "T043", "amount": 200.00, "date": "2025-02-12" },
+      { "transactionId": "T044", "amount": 35.50,  "date": "2025-03-04" },
+      { "transactionId": "T045", "amount": 315.00, "date": "2025-03-30" }
+    ]
+  },
+  {
+    "customerId": "C010",
+    "customerName": "James Anderson",
+    "email": "james.anderson@example.com",
+    "transactions": [
+      { "transactionId": "T046", "amount": 88.00,  "date": "2025-01-19" },
+      { "transactionId": "T047", "amount": 155.00, "date": "2025-02-07" },
+      { "transactionId": "T048", "amount": 270.25, "date": "2025-02-26" },
+      { "transactionId": "T049", "amount": 60.00,  "date": "2025-03-17" }
+    ]
+  },
+  {
+    "customerId": "C011",
+    "customerName": "Karen White",
+    "email": "karen.white@example.com",
+    "transactions": [
+      { "transactionId": "T050", "amount": 410.00, "date": "2025-01-03" },
+      { "transactionId": "T051", "amount": 72.00,  "date": "2025-01-23" },
+      { "transactionId": "T052", "amount": 135.50, "date": "2025-02-16" },
+      { "transactionId": "T053", "amount": 95.00,  "date": "2025-03-08" },
+      { "transactionId": "T054", "amount": 190.00, "date": "2025-03-24" }
+    ]
+  },
+  {
+    "customerId": "C012",
+    "customerName": "Liam Harris",
+    "email": "liam.harris@example.com",
+    "transactions": [
+      { "transactionId": "T055", "amount": 55.00,  "date": "2025-01-11" },
+      { "transactionId": "T056", "amount": 170.00, "date": "2025-02-01" },
+      { "transactionId": "T057", "amount": 100.00, "date": "2025-02-20" },
+      { "transactionId": "T058", "amount": 245.00, "date": "2025-03-13" }
+    ]
+  },
+  {
+    "customerId": "C013",
+    "customerName": "Mia Jackson",
+    "email": "mia.jackson@example.com",
+    "transactions": [
+      { "transactionId": "T059", "amount": 340.00, "date": "2025-01-09" },
+      { "transactionId": "T060", "amount": 80.00,  "date": "2025-01-27" },
+      { "transactionId": "T061", "amount": 120.75, "date": "2025-02-13" },
+      { "transactionId": "T062", "amount": 50.00,  "date": "2025-02-27" },
+      { "transactionId": "T063", "amount": 175.25, "date": "2025-03-19" }
+    ]
+  },
+  {
+    "customerId": "C014",
+    "customerName": "Noah Thomas",
+    "email": "noah.thomas@example.com",
+    "transactions": [
+      { "transactionId": "T064", "amount": 99.00,  "date": "2025-01-16" },
+      { "transactionId": "T065", "amount": 215.00, "date": "2025-02-04" },
+      { "transactionId": "T066", "amount": 68.00,  "date": "2025-02-21" },
+      { "transactionId": "T067", "amount": 290.50, "date": "2025-03-06" },
+      { "transactionId": "T068", "amount": 45.00,  "date": "2025-03-26" }
+    ]
+  },
+  {
+    "customerId": "C015",
+    "customerName": "Olivia Robinson",
+    "email": "olivia.robinson@example.com",
+    "transactions": [
+      { "transactionId": "T069", "amount": 600.00, "date": "2025-01-07" },
+      { "transactionId": "T070", "amount": 83.00,  "date": "2025-01-29" },
+      { "transactionId": "T071", "amount": 155.00, "date": "2025-02-17" },
+      { "transactionId": "T072", "amount": 42.50,  "date": "2025-03-03" },
+      { "transactionId": "T073", "amount": 225.00, "date": "2025-03-21" }
+    ]
+  },
+  {
+    "customerId": "C016",
+    "customerName": "Peter Clark",
+    "email": "peter.clark@example.com",
+    "transactions": [
+      { "transactionId": "T074", "amount": 112.00, "date": "2025-01-13" },
+      { "transactionId": "T075", "amount": 49.99,  "date": "2025-02-06" },
+      { "transactionId": "T076", "amount": 188.00, "date": "2025-03-16" }
+    ]
+  },
+  {
+    "customerId": "C017",
+    "customerName": "Quinn Lewis",
+    "email": "quinn.lewis@example.com",
+    "transactions": [
+      { "transactionId": "T077", "amount": 75.00,  "date": "2025-01-24" },
+      { "transactionId": "T078", "amount": 135.00, "date": "2025-02-11" },
+      { "transactionId": "T079", "amount": 260.00, "date": "2025-03-09" },
+      { "transactionId": "T080", "amount": 58.50,  "date": "2025-03-27" }
+    ]
+  },
+  {
+    "customerId": "C018",
+    "customerName": "Rachel Walker",
+    "email": "rachel.walker@example.com",
+    "transactions": [
+      { "transactionId": "T081", "amount": 0.00,   "date": "2025-01-17" },
+      { "transactionId": "T082", "amount": 49.00,  "date": "2025-02-23" },
+      { "transactionId": "T083", "amount": 50.00,  "date": "2025-03-14" }
+    ]
+  }
+]

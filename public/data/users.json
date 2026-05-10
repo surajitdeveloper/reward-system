@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "customerId": "C001",
+    "customerName": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "phone": "+1-555-0101",
+    "joinDate": "2024-06-01",
+    "tier": "Gold"
+  },
+  {
+    "id": 2,
+    "customerId": "C002",
+    "customerName": "Bob Williams",
+    "email": "bob.williams@example.com",
+    "phone": "+1-555-0102",
+    "joinDate": "2024-07-15",
+    "tier": "Silver"
+  },
+  {
+    "id": 3,
+    "customerId": "C003",
+    "customerName": "Carol Davis",
+    "email": "carol.davis@example.com",
+    "phone": "+1-555-0103",
+    "joinDate": "2024-05-20",
+    "tier": "Platinum"
+  },
+  {
+    "id": 4,
+    "customerId": "C004",
+    "customerName": "David Martinez",
+    "email": "david.martinez@example.com",
+    "phone": "+1-555-0104",
+    "joinDate": "2024-08-10",
+    "tier": "Silver"
+  },
+  {
+    "id": 5,
+    "customerId": "C005",
+    "customerName": "Emma Wilson",
+    "email": "emma.wilson@example.com",
+    "phone": "+1-555-0105",
+    "joinDate": "2024-04-01",
+    "tier": "Platinum"
+  },
+  {
+    "id": 6,
+    "customerId": "C006",
+    "customerName": "Frank Thompson",
+    "email": "frank.thompson@example.com",
+    "phone": "+1-555-0106",
+    "joinDate": "2024-09-05",
+    "tier": "Bronze"
+  },
+  {
+    "id": 7,
+    "customerId": "C007",
+    "customerName": "Grace Lee",
+    "email": "grace.lee@example.com",
+    "phone": "+1-555-0107",
+    "joinDate": "2024-07-22",
+    "tier": "Gold"
+  },
+  {
+    "id": 8,
+    "customerId": "C008",
+    "customerName": "Henry Brown",
+    "email": "henry.brown@example.com",
+    "phone": "+1-555-0108",
+    "joinDate": "2024-10-01",
+    "tier": "Silver"
+  },
+  {
+    "id": 9,
+    "customerId": "C009",
+    "customerName": "Isabella Garcia",
+    "email": "isabella.garcia@example.com",
+    "phone": "+1-555-0109",
+    "joinDate": "2024-06-18",
+    "tier": "Gold"
+  },
+  {
+    "id": 10,
+    "customerId": "C010",
+    "customerName": "James Anderson",
+    "email": "james.anderson@example.com",
+    "phone": "+1-555-0110",
+    "joinDate": "2024-08-30",
+    "tier": "Silver"
+  },
+  {
+    "id": 11,
+    "customerId": "C011",
+    "customerName": "Karen White",
+    "email": "karen.white@example.com",
+    "phone": "+1-555-0111",
+    "joinDate": "2024-05-05",
+    "tier": "Platinum"
+  },
+  {
+    "id": 12,
+    "customerId": "C012",
+    "customerName": "Liam Harris",
+    "email": "liam.harris@example.com",
+    "phone": "+1-555-0112",
+    "joinDate": "2024-09-20",
+    "tier": "Bronze"
+  },
+  {
+    "id": 13,
+    "customerId": "C013",
+    "customerName": "Mia Jackson",
+    "email": "mia.jackson@example.com",
+    "phone": "+1-555-0113",
+    "joinDate": "2024-06-12",
+    "tier": "Gold"
+  },
+  {
+    "id": 14,
+    "customerId": "C014",
+    "customerName": "Noah Thomas",
+    "email": "noah.thomas@example.com",
+    "phone": "+1-555-0114",
+    "joinDate": "2024-07-08",
+    "tier": "Silver"
+  },
+  {
+    "id": 15,
+    "customerId": "C015",
+    "customerName": "Olivia Robinson",
+    "email": "olivia.robinson@example.com",
+    "phone": "+1-555-0115",
+    "joinDate": "2024-04-25",
+    "tier": "Platinum"
+  },
+  {
+    "id": 16,
+    "customerId": "C016",
+    "customerName": "Peter Clark",
+    "email": "peter.clark@example.com",
+    "phone": "+1-555-0116",
+    "joinDate": "2024-10-15",
+    "tier": "Bronze"
+  },
+  {
+    "id": 17,
+    "customerId": "C017",
+    "customerName": "Quinn Lewis",
+    "email": "quinn.lewis@example.com",
+    "phone": "+1-555-0117",
+    "joinDate": "2024-08-02",
+    "tier": "Silver"
+  },
+  {
+    "id": 18,
+    "customerId": "C018",
+    "customerName": "Rachel Walker",
+    "email": "rachel.walker@example.com",
+    "phone": "+1-555-0118",
+    "joinDate": "2024-11-01",
+    "tier": "Bronze"
+  }
+]
