@@ -77,7 +77,7 @@ export const fetchUsersApi = async () => {
   await simulateDelay();
 
   try {
-    const data = await fetchJson('/data/users.json');
+    const data = await fetchJson(`${process.env.PUBLIC_URL}/data/users.json`);
     logger.apiResponse('/api/users', `Fetched ${data.length} users`);
     return data;
   } catch (err) {
@@ -97,7 +97,7 @@ export const fetchTransactionsApi = async () => {
   await simulateDelay();
 
   try {
-    const data = await fetchJson('/data/transactions.json');
+    const data = await fetchJson(`${process.env.PUBLIC_URL}/data/transactions.json`);
     logger.apiResponse('/api/transactions', `Fetched ${data.length} customer records`);
     return data;
   } catch (err) {
@@ -116,7 +116,7 @@ export const fetchCustomerTransactionsApi = async (customerId) => {
   await simulateDelay();
 
   try {
-    const data = await fetchJson('/data/transactions.json');
+    const data = await fetchJson(`${process.env.PUBLIC_URL}/data/transactions.json`);
     const customerData = data.find((c) => c.customerId === customerId);
 
     if (!customerData) {
