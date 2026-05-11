@@ -50,7 +50,6 @@ const MainLayout = ({ children }) => {
           sx={{
             flex: 1,
             p: 3,
-            ml: sidebarOpen ? `${DRAWER_WIDTH}px` : 0,
             transition: 'margin-left 0.3s',
             bgcolor: '#fafafa',
             minHeight: 'calc(100vh - 64px)',
