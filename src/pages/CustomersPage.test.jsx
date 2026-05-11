@@ -13,7 +13,7 @@ import useTransactions from '../hooks/useTransactions';
 jest.mock('../hooks/useCustomers');
 jest.mock('../hooks/useTransactions');
 
-const mockCustomers = [{ customerId: 'C1', name: 'John Doe', email: 'john@example.com' }];
+const mockCustomers = [{ customerId: 'C1', customerName: 'John Doe', email: 'john@example.com' }];
 const mockTransactions = [{ customerId: 'C1', transactions: [] }];
 
 describe('CustomersPage Component', () => {

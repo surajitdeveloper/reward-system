@@ -47,7 +47,7 @@ const DashboardPage = () => {
 
   // Compute summary stats
   const stats = useMemo(() => {
-    if (!transactionData.length) return null;
+    if (!transactionData || !transactionData.length) return null;
 
     let totalPoints = 0;
     let totalTxns   = 0;

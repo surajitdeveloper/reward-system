@@ -37,8 +37,8 @@ const CustomersPage = () => {
   const loading = custLoading || txnLoading;
   const error = custError || txnError;
 
-  const selectedCustomer = customers.find(c => c.customerId === selectedCustomerId);
-  const selectedTransactions = transactionData.find(c => c.customerId === selectedCustomerId)?.transactions || [];
+  const selectedCustomer = customers?.find(c => c.customerId === selectedCustomerId);
+  const selectedTransactions = transactionData?.find(c => c.customerId === selectedCustomerId)?.transactions || [];
 
   return (
     <Box>

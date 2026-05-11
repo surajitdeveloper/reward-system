@@ -9,7 +9,7 @@ import CustomerTable from './CustomerTable';
 import CustomerRow from './CustomerRow';
 import CustomerDetailsDialog from './CustomerDetailsDialog';
 
-const mockCustomers = [{ customerId: 'C1', name: 'John Doe', email: 'john@example.com' }];
+const mockCustomers = [{ customerId: 'C1', customerName: 'John Doe', email: 'john@example.com' }];
 const mockTxns = [{ customerId: 'C1', transactions: [{ amount: 120, date: '2025-01-01', points: 90 }] }];
 
 describe('Customer Components', () => {

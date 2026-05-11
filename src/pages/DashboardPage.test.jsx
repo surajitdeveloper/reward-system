@@ -15,7 +15,7 @@ jest.mock('../hooks/useCustomers');
 jest.mock('../hooks/useTransactions');
 
 const mockCustomers = [
-  { customerId: 'C1', name: 'User 1' }
+  { customerId: 'C1', customerName: 'User 1' }
 ];
 
 const mockTransactions = [
@@ -42,8 +42,8 @@ describe('DashboardPage Component', () => {
   });
 
   test('Positive: should show loading state', () => {
-    useCustomers.mockReturnValue({ loading: true });
-    useTransactions.mockReturnValue({ loading: true });
+    useCustomers.mockReturnValue({ customers: [], loading: true, error: null });
+    useTransactions.mockReturnValue({ transactionData: [], loading: true, error: null });
 
     render(
       <BrowserRouter>
@@ -55,8 +55,8 @@ describe('DashboardPage Component', () => {
   });
 
   test('Negative: should show error alert', () => {
-    useCustomers.mockReturnValue({ error: 'Failed to load' });
-    useTransactions.mockReturnValue({ error: null });
+    useCustomers.mockReturnValue({ customers: [], loading: false, error: 'Failed to load' });
+    useTransactions.mockReturnValue({ transactionData: [], loading: false, error: null });
 
     render(
       <BrowserRouter>
