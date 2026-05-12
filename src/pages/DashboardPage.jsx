@@ -163,25 +163,26 @@ const DashboardPage = () => {
       {/* ── Tier Summary ── */}
       <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, mt: 2 }}>
         <Card>
-        <CardContent>
-          <Typography variant="h6" fontWeight={600} mb={2}>
-            Customer Tier Distribution
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-            {['Platinum', 'Gold', 'Silver', 'Bronze'].map((tier) => {
-              const count = customers?.filter((c) => c?.tier === tier)?.length || 0;
-              const colorMap = { Platinum: '#1976d2', Gold: '#ffc107', Silver: '#9e9e9e', Bronze: '#cd7f32' };
-              return (
-                <Chip
-                  key={tier}
-                  label={`${tier}: ${count}`}
-                  sx={{ bgcolor: colorMap[tier], color: tier === 'Gold' ? '#333' : '#fff', fontWeight: 600 }}
-                />
-              );
-            })}
-          </Box>
-        </CardContent>
-      </Card>
+          <CardContent>
+            <Typography variant="h6" fontWeight={600} mb={2}>
+              Customer Tier Distribution
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+              {['Platinum', 'Gold', 'Silver', 'Bronze'].map((tier) => {
+                const count = customers?.filter((c) => c?.tier === tier)?.length || 0;
+                const colorMap = { Platinum: '#1976d2', Gold: '#ffc107', Silver: '#9e9e9e', Bronze: '#cd7f32' };
+                return (
+                  <Chip
+                    key={tier}
+                    label={`${tier}: ${count}`}
+                    sx={{ bgcolor: colorMap[tier], color: tier === 'Gold' ? '#333' : '#fff', fontWeight: 600 }}
+                  />
+                );
+              })}
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
     </Box>
   );
 };

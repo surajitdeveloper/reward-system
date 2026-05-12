@@ -115,6 +115,7 @@ const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
             <Typography variant="subtitle1" fontWeight={700} mb={1}>Recent Transactions Details</Typography>
             {processedData ? (
               <Box sx={{ maxHeight: 400, overflow: 'auto' }}>
+                <Table stickyHeader size="small">
                   <TableHead>
                     <TableRow>
                       <TableCell>Date</TableCell>
