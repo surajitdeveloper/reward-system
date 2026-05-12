@@ -50,6 +50,22 @@ describe('Logger Utility', () => {
 
   test('Negative: should handle logging without arguments', () => {
     logger.info();
+    logger.warn();
+    logger.error();
+
     expect(spyInfo).toHaveBeenCalled();
+    expect(spyWarn).toHaveBeenCalled();
+    expect(spyError).toHaveBeenCalled();
+  });
+
+  test('Negative: should handle apiCall with a null payload', () => {
+    logger.apiCall('/test-endpoint', null);
+    expect(spyGroup).toHaveBeenCalled();
+    expect(spyDebug).toHaveBeenCalled();
+  });
+
+  test('Negative: should handle apiResponse without payload', () => {
+    logger.apiResponse('/test-endpoint', undefined);
+    expect(spyGroup).toHaveBeenCalled();
   });
 });

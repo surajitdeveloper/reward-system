@@ -73,45 +73,20 @@ function App() {
       <AuthProvider>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
-            {/* Public Routes */}
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
 
-            {/* Protected Routes */}
             <Route
-              path={ROUTES.DASHBOARD}
               element={
                 <ProtectedRoute>
-                  <MainLayout>
-                    <DashboardPage />
-                  </MainLayout>
+                  <MainLayout />
                 </ProtectedRoute>
               }
-            />
-            
-            <Route
-              path={ROUTES.CUSTOMERS}
-              element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <CustomersPage />
-                  </MainLayout>
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path={ROUTES.REWARDS}
-              element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <RewardsPage />
-                  </MainLayout>
-                </ProtectedRoute>
-              }
-            />
-
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+            >
+              <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+              <Route path={ROUTES.CUSTOMERS} element={<CustomersPage />} />
+              <Route path={ROUTES.REWARDS} element={<RewardsPage />} />
+              <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

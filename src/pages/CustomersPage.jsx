@@ -8,14 +8,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import CustomerTable from '../components/customers/CustomerTable';
 import CustomerDetailsDialog from '../components/customers/CustomerDetailsDialog';
 import useCustomers from '../hooks/useCustomers';
 import useTransactions from '../hooks/useTransactions';
-import logger from '../utils/logger';
 
 const CustomersPage = () => {
   const { customers, loading: custLoading, error: custError } = useCustomers();
@@ -25,7 +21,6 @@ const CustomersPage = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleViewDetail = (customerId) => {
-    logger.info('Opening details for customer:', customerId);
     setSelectedCustomerId(customerId);
     setDialogOpen(true);
   };
@@ -42,18 +37,6 @@ const CustomersPage = () => {
 
   return (
     <Box>
-      {/* Breadcrumbs */}
-      <Breadcrumbs 
-        separator={<NavigateNextIcon fontSize="small" />} 
-        aria-label="breadcrumb"
-        sx={{ mb: 2 }}
-      >
-        <Link underline="hover" color="inherit" href="/">
-          Dashboard
-        </Link>
-        <Typography color="text.primary">Customers</Typography>
-      </Breadcrumbs>
-
       <Typography variant="h5" fontWeight={700} mb={1}>
         Customer Management
       </Typography>

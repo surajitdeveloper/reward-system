@@ -4,7 +4,6 @@
  */
 
 import React, { useMemo } from 'react';
-import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -43,7 +42,7 @@ const StatCard = ({ title, value, icon, color }) => (
 
 const DashboardPage = () => {
   const { transactionData, loading: txnLoading, error: txnError } = useTransactions();
-  const { customers, loading: custLoading } = useCustomers();
+  const { customers, loading: custLoading, error: custError } = useCustomers();
 
   // Compute summary stats
   const stats = useMemo(() => {
@@ -85,6 +84,10 @@ const DashboardPage = () => {
     return <Alert severity="error" sx={{ mt: 2 }}>{txnError}</Alert>;
   }
 
+  if (custError) {
+    return <Alert severity="error" sx={{ mt: 2 }}>{custError}</Alert>;
+  }
+
   return (
     <Box>
       <Typography variant="h5" fontWeight={700} mb={3}>
@@ -92,32 +95,32 @@ const DashboardPage = () => {
       </Typography>
 
       {/* ── Stat Cards ── */}
-      <Grid container spacing={2} mb={4}>
-        <Grid item xs={12} sm={6} md={3}>
+      <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(4, minmax(0, 1fr))' } }} mb={4}>
+        <Box>
           <StatCard
             title="Total Customers"
             value={customers?.length}
             icon={<PeopleIcon fontSize="large" />}
             color="#1565c0"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box>
           <StatCard
             title="Total Transactions"
             value={stats?.totalTxns ?? 0}
             icon={<ReceiptIcon fontSize="large" />}
             color="#2e7d32"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box>
           <StatCard
             title="Total Points Awarded"
             value={(stats?.totalPoints ?? 0).toLocaleString()}
             icon={<EmojiEventsIcon fontSize="large" />}
             color="#f57c00"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box>
           <StatCard
             title="Avg Points / Customer"
             value={
@@ -128,8 +131,8 @@ const DashboardPage = () => {
             icon={<TrendingUpIcon fontSize="large" />}
             color="#7b1fa2"
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {/* ── Bar Chart: Top Customers by Points ── */}
       <Card>
@@ -158,7 +161,8 @@ const DashboardPage = () => {
       </Card>
 
       {/* ── Tier Summary ── */}
-      <Card sx={{ mt: 2 }}>
+      <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, mt: 2 }}>
+        <Card>
         <CardContent>
           <Typography variant="h6" fontWeight={600} mb={2}>
             Customer Tier Distribution

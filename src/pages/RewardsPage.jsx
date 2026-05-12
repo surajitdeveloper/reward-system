@@ -63,8 +63,8 @@ const RewardsPage = () => {
       {error && <Alert severity="error">{error}</Alert>}
 
       {!loading && !error && (
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
+        <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' } }}>
+          <Box>
             <TableContainer component={Paper} sx={{ boxShadow: 2 }}>
               <Table aria-label="rewards summary table">
                 <TableHead sx={{ bgcolor: '#f5f5f5' }}>
@@ -101,13 +101,13 @@ const RewardsPage = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Grid>
+          </Box>
 
-          <Grid item xs={12} md={6}>
+          <Box>
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h6" gutterBottom>About the Program</Typography>
-                <Typography variant="body2" paragraph>
+                <Typography variant="body2" sx={{ mb: 1 }}>
                   The rewards program encourages customer loyalty by awarding points for every purchase.
                 </Typography>
                 <Typography variant="body2" component="div">
@@ -121,8 +121,8 @@ const RewardsPage = () => {
                 </Typography>
               </CardContent>
             </Card>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       )}
     </Box>
   );
