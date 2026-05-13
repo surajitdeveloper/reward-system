@@ -116,19 +116,22 @@ const LoginPage = () => {
               error={!!fieldErrors.password}
               helperText={fieldErrors.password}
               autoComplete="current-password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      id="btn-toggle-password"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      edge="end"
-                      size="small"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        id="btn-toggle-password"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        edge="end"
+                        size="small"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
               }}
             />
 

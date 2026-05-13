@@ -1,46 +1,38 @@
 /**
  * Layout.test.jsx
- * Tests for Sidebar and Navbar.
+ * Tests for the simplified Navbar layout.
  */
 
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 
 const mockUser = { name: 'Admin User' };
 
-describe('Layout Components', () => {
-  
-  test('Sidebar Positive: should render navigation links', () => {
-    render(
-      <BrowserRouter>
-        <Sidebar open={true} />
-      </BrowserRouter>
-    );
-    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
-    expect(screen.getByText(/Customers/i)).toBeInTheDocument();
-  });
-
-  test('Navbar Positive: should render user name', () => {
+describe('Navbar Component', () => {
+  test('renders navigation links and user info', () => {
     render(
       <BrowserRouter>
         <Navbar user={mockUser} onLogout={() => {}} />
       </BrowserRouter>
     );
+
+    expect(screen.getByRole('button', { name: /Dashboard/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Customers/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Rewards/i })).toBeInTheDocument();
     expect(screen.getByText(/Admin User/i)).toBeInTheDocument();
   });
 
-  test('Navbar Negative: should handle logout click', () => {
+  test('calls logout when the button is clicked', () => {
     const onLogout = jest.fn();
     render(
       <BrowserRouter>
         <Navbar user={mockUser} onLogout={onLogout} />
       </BrowserRouter>
     );
-    const logoutBtn = screen.getByRole('button', { name: /Logout/i });
-    fireEvent.click(logoutBtn);
+
+    fireEvent.click(screen.getByRole('button', { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
 });

@@ -37,11 +37,15 @@ const useCustomers = () => {
     }
   }, []);
 
+  const addCustomer = useCallback((customer) => {
+    setCustomers((prevCustomers) => [...prevCustomers, customer]);
+  }, []);
+
   useEffect(() => {
     fetchCustomers();
   }, [fetchCustomers]);
 
-  return { customers, loading, error, refetch: fetchCustomers };
+  return { customers, loading, error, refetch: fetchCustomers, addCustomer };
 };
 
 export default useCustomers;

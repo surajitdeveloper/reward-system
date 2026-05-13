@@ -3,8 +3,7 @@
  * Overview dashboard showing summary stats and top customers.
  */
 
-import React, { useMemo } from 'react';
-import Grid from '@mui/material/Grid';
+import React, { useMemo, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -12,6 +11,13 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import PeopleIcon from '@mui/icons-material/People';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -21,6 +27,7 @@ import {
 } from 'recharts';
 import useTransactions from '../hooks/useTransactions';
 import useCustomers from '../hooks/useCustomers';
+import CustomerDetailsDialog from '../components/customers/CustomerDetailsDialog';
 import { calculateTotalPoints } from '../utils/rewardCalculator';
 import { CHART_COLORS } from '../constants/appConstants';
 
@@ -43,7 +50,10 @@ const StatCard = ({ title, value, icon, color }) => (
 
 const DashboardPage = () => {
   const { transactionData, loading: txnLoading, error: txnError } = useTransactions();
-  const { customers, loading: custLoading } = useCustomers();
+  const { customers, loading: custLoading, error: custError } = useCustomers();
+  const [selectedTier, setSelectedTier] = useState(null);
+  const [selectedCustomerId, setSelectedCustomerId] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   // Compute summary stats
   const stats = useMemo(() => {
@@ -56,10 +66,10 @@ const DashboardPage = () => {
       const pts = calculateTotalPoints(cust?.transactions);
       totalPoints += pts;
       totalTxns   += cust?.transactions?.length || 0;
-      return { 
-        name: cust?.customerName?.split(' ')[0] || 'Unknown', 
-        points: pts, 
-        customerId: cust?.customerId 
+      return {
+        name: cust?.customerName?.split(' ')[0] || 'Unknown',
+        points: pts,
+        customerId: cust?.customerId,
       };
     }) || [];
 
@@ -68,10 +78,33 @@ const DashboardPage = () => {
       .sort((a, b) => b.points - a.points)
       .slice(0, 8);
 
-    return { totalPoints, totalTxns, top8 };
+    return { totalPoints, totalTxns, top8, customerPoints };
   }, [transactionData]);
 
+  const tierCustomers = useMemo(() => {
+    if (!selectedTier || !customers || !stats?.customerPoints) return [];
+    return customers
+      .filter((customer) => customer?.tier === selectedTier)
+      .map((customer) => ({
+        ...customer,
+        points: stats.customerPoints.find((item) => item.customerId === customer.customerId)?.points || 0,
+      }))
+      .sort((a, b) => b.points - a.points);
+  }, [selectedTier, customers, stats]);
+
   const loading = txnLoading || custLoading;
+
+  const selectedCustomer = customers?.find((customer) => customer.customerId === selectedCustomerId);
+  const selectedTransactions = transactionData?.find((record) => record.customerId === selectedCustomerId)?.transactions || [];
+
+  const handleOpenCustomerDetails = (customerId) => {
+    setSelectedCustomerId(customerId);
+    setDialogOpen(true);
+  };
+
+  const handleCloseCustomerDetails = () => {
+    setDialogOpen(false);
+  };
 
   if (loading) {
     return (
@@ -85,6 +118,10 @@ const DashboardPage = () => {
     return <Alert severity="error" sx={{ mt: 2 }}>{txnError}</Alert>;
   }
 
+  if (custError) {
+    return <Alert severity="error" sx={{ mt: 2 }}>{custError}</Alert>;
+  }
+
   return (
     <Box>
       <Typography variant="h5" fontWeight={700} mb={3}>
@@ -92,32 +129,32 @@ const DashboardPage = () => {
       </Typography>
 
       {/* ── Stat Cards ── */}
-      <Grid container spacing={2} mb={4}>
-        <Grid item xs={12} sm={6} md={3}>
+      <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(4, minmax(0, 1fr))' } }} mb={4}>
+        <Box>
           <StatCard
             title="Total Customers"
             value={customers?.length}
             icon={<PeopleIcon fontSize="large" />}
             color="#1565c0"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box>
           <StatCard
             title="Total Transactions"
             value={stats?.totalTxns ?? 0}
             icon={<ReceiptIcon fontSize="large" />}
             color="#2e7d32"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box>
           <StatCard
             title="Total Points Awarded"
             value={(stats?.totalPoints ?? 0).toLocaleString()}
             icon={<EmojiEventsIcon fontSize="large" />}
             color="#f57c00"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box>
           <StatCard
             title="Avg Points / Customer"
             value={
@@ -128,8 +165,8 @@ const DashboardPage = () => {
             icon={<TrendingUpIcon fontSize="large" />}
             color="#7b1fa2"
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {/* ── Bar Chart: Top Customers by Points ── */}
       <Card>
@@ -158,26 +195,88 @@ const DashboardPage = () => {
       </Card>
 
       {/* ── Tier Summary ── */}
-      <Card sx={{ mt: 2 }}>
-        <CardContent>
-          <Typography variant="h6" fontWeight={600} mb={2}>
-            Customer Tier Distribution
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-            {['Platinum', 'Gold', 'Silver', 'Bronze'].map((tier) => {
-              const count = customers?.filter((c) => c?.tier === tier)?.length || 0;
-              const colorMap = { Platinum: '#1976d2', Gold: '#ffc107', Silver: '#9e9e9e', Bronze: '#cd7f32' };
-              return (
-                <Chip
-                  key={tier}
-                  label={`${tier}: ${count}`}
-                  sx={{ bgcolor: colorMap[tier], color: tier === 'Gold' ? '#333' : '#fff', fontWeight: 600 }}
-                />
-              );
-            })}
-          </Box>
-        </CardContent>
-      </Card>
+      <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, mt: 2 }}>
+        <Card>
+          <CardContent>
+            <Typography variant="h6" fontWeight={600} mb={2}>
+              Customer Tier Distribution
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+              {['Platinum', 'Gold', 'Silver', 'Bronze'].map((tier) => {
+                const count = customers?.filter((c) => c?.tier === tier)?.length || 0;
+                const colorMap = { Platinum: '#1976d2', Gold: '#ffc107', Silver: '#9e9e9e', Bronze: '#cd7f32' };
+                return (
+                  <Chip
+                    key={tier}
+                    label={`${tier}: ${count}`}
+                    clickable
+                    variant={selectedTier === tier ? 'filled' : 'outlined'}
+                    onClick={() => setSelectedTier((prev) => (prev === tier ? null : tier))}
+                    sx={{
+                      bgcolor: selectedTier === tier ? colorMap[tier] : undefined,
+                      color: selectedTier === tier ? (tier === 'Gold' ? '#333' : '#fff') : colorMap[tier],
+                      fontWeight: 600,
+                      borderColor: colorMap[tier],
+                    }}
+                  />
+                );
+              })}
+            </Box>
+            <Typography variant="body2" color="text.secondary" mt={2}>
+              Click a tier to list customers and their earned points.
+            </Typography>
+          </CardContent>
+        </Card>
+
+        {selectedTier && (
+          <Card>
+            <CardContent>
+              <Typography variant="h6" fontWeight={600} mb={2}>
+                {selectedTier} Customers
+              </Typography>
+              {tierCustomers.length ? (
+                <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
+                  <Table size="small" aria-label="tier customer list">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Email</TableCell>
+                        <TableCell>Tier</TableCell>
+                        <TableCell align="right">Points</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {tierCustomers.map((customer) => (
+                        <TableRow
+                          key={customer.customerId}
+                          hover
+                          onClick={() => handleOpenCustomerDetails(customer.customerId)}
+                          sx={{ cursor: 'pointer' }}
+                        >
+                          <TableCell>{customer.customerName}</TableCell>
+                          <TableCell>{customer.email}</TableCell>
+                          <TableCell>{customer.tier}</TableCell>
+                          <TableCell align="right">{customer.points.toLocaleString()}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <Typography color="text.secondary">No customers found for this tier.</Typography>
+              )}
+            </CardContent>
+          </Card>
+        )}
+      </Box>
+
+      <CustomerDetailsDialog
+        open={dialogOpen}
+        customer={selectedCustomer}
+        transactions={selectedTransactions}
+        onClose={handleCloseCustomerDetails}
+        showAllTransactions
+      />
     </Box>
   );
 };

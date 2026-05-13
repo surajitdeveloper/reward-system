@@ -5,50 +5,58 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import RewardsPage from './RewardsPage';
-import useCustomers from '../hooks/useCustomers';
 import useTransactions from '../hooks/useTransactions';
 
-jest.mock('../hooks/useCustomers');
 jest.mock('../hooks/useTransactions');
 
-const mockCustomers = [{ customerId: 'C1', customerName: 'John Doe' }];
-const mockTransactions = [{ customerId: 'C1', transactions: [{ amount: 120, date: '2025-01-01' }] }];
+const mockTransactions = [
+  {
+    customerId: 'C1',
+    transactions: [
+      { amount: 120, date: '2025-01-01', points: 90 },
+      { amount: 80, date: '2025-01-20', points: 30 },
+    ],
+  },
+];
 
 describe('RewardsPage Component', () => {
-  
   beforeEach(() => {
-    useCustomers.mockReturnValue({ customers: mockCustomers, loading: false, error: null });
     useTransactions.mockReturnValue({ transactionData: mockTransactions, loading: false, error: null });
   });
 
-  test('Positive: should render rewards summary header', () => {
-    render(
-      <BrowserRouter>
-        <RewardsPage />
-      </BrowserRouter>
-    );
-    expect(screen.getByText(/Rewards Summary/i)).toBeInTheDocument();
+  test('Positive: should render analytics header', () => {
+    render(<RewardsPage />);
+    expect(screen.getByText(/Rewards Analytics/i)).toBeInTheDocument();
   });
 
-  test('Positive: should render points per month', () => {
-    render(
-      <BrowserRouter>
-        <RewardsPage />
-      </BrowserRouter>
-    );
-    // Since mock transactions has 120, it should be 90 points
-    expect(screen.getByText(/90/i)).toBeInTheDocument();
+  test('Positive: should render monthly points for January 2025', () => {
+    render(<RewardsPage />);
+    expect(screen.getByText(/January 2025/i)).toBeInTheDocument();
+    expect(screen.getByText(/120 pts/i)).toBeInTheDocument();
   });
 
-  test('Negative: should show loading state', () => {
-    useCustomers.mockReturnValue({ loading: true });
-    render(
-      <BrowserRouter>
-        <RewardsPage />
-      </BrowserRouter>
-    );
+  test('Positive: should show the program description card', () => {
+    render(<RewardsPage />);
+    expect(screen.getByText(/About the Program/i)).toBeInTheDocument();
+    expect(screen.getByText(/1 point per dollar spent between/i)).toBeInTheDocument();
+  });
+
+  test('Negative: should show a loading spinner when transaction loading is true', () => {
+    useTransactions.mockReturnValue({ transactionData: [], loading: true, error: null });
+    render(<RewardsPage />);
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
+  });
+
+  test('Negative: should display an error alert when the transactions hook returns an error', () => {
+    useTransactions.mockReturnValue({ transactionData: [], loading: false, error: 'Failed to load transactions' });
+    render(<RewardsPage />);
+    expect(screen.getByText(/Failed to load transactions/i)).toBeInTheDocument();
+  });
+
+  test('Negative: should show no data available when there are no rewards', () => {
+    useTransactions.mockReturnValue({ transactionData: [], loading: false, error: null });
+    render(<RewardsPage />);
+    expect(screen.getByText(/No data available/i)).toBeInTheDocument();
   });
 });
