@@ -31,19 +31,20 @@ import {
 import { formatDate, getMonthLabel, sortYearMonths } from '../../utils/dateUtils';
 import { NO_TRANSACTIONS_LABEL, DEFAULT_RECENT_MONTHS } from '../../constants/appConstants';
 
-const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
+const CustomerDetailsDialog = ({ open, customer, transactions, onClose, showAllTransactions = false }) => {
   // Process data for display
   const processedData = useMemo(() => {
     if (!customer || !transactions || transactions.length === 0) return null;
 
-    // By default, filter to recent 3 months as per requirement
-    const recentTxns = filterRecentMonths(transactions, DEFAULT_RECENT_MONTHS);
-    const monthlyGroups = groupPointsByMonth(recentTxns);
+    const displayTransactions = showAllTransactions
+      ? transactions
+      : filterRecentMonths(transactions, DEFAULT_RECENT_MONTHS);
+    const monthlyGroups = groupPointsByMonth(displayTransactions);
     const months = sortYearMonths(Object.keys(monthlyGroups));
-    const totalPoints = calculateTotalPoints(recentTxns);
+    const totalPoints = calculateTotalPoints(displayTransactions);
 
-    return { months, monthlyGroups, totalPoints, recentTxns };
-  }, [customer, transactions]);
+    return { months, monthlyGroups, totalPoints, displayTransactions };
+  }, [customer, transactions, showAllTransactions]);
 
   if (!customer) return null;
 
@@ -79,7 +80,9 @@ const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
                   <Chip label={customer?.tier} color="primary" variant="outlined" size="small" />
                 </Box>
                 <Divider sx={{ my: 2 }} />
-                <Typography variant="body2" fontWeight={600}>Total Points (Last {DEFAULT_RECENT_MONTHS} Months)</Typography>
+                <Typography variant="body2" fontWeight={600}>
+                  Total Points {showAllTransactions ? '(All Transactions)' : `(Last ${DEFAULT_RECENT_MONTHS} Months)`}
+                </Typography>
                 <Typography variant="h3" color="primary.main" fontWeight={800}>
                   {processedData ? processedData?.totalPoints : 0}
                 </Typography>
@@ -112,7 +115,9 @@ const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
           </Box>
           {/* ── Detailed Transaction Table ── */}
           <Box>
-            <Typography variant="subtitle1" fontWeight={700} mb={1}>Recent Transactions Details</Typography>
+            <Typography variant="subtitle1" fontWeight={700} mb={1}>
+            {showAllTransactions ? 'All Transaction Details' : 'Recent Transactions Details'}
+          </Typography>
             {processedData ? (
               <Box sx={{ maxHeight: 400, overflow: 'auto' }}>
                 <Table stickyHeader size="small">
@@ -125,7 +130,7 @@ const CustomerDetailsDialog = ({ open, customer, transactions, onClose }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {processedData?.recentTxns?.map((txn) => (
+                    {processedData?.displayTransactions?.map((txn) => (
                       <TableRow key={txn?.transactionId} hover>
                         <TableCell>{formatDate(txn?.date)}</TableCell>
                         <TableCell>{txn?.transactionId}</TableCell>
