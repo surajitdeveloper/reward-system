@@ -25,41 +25,89 @@ import RewardsPage from './pages/RewardsPage';
 // Constants
 import { ROUTES } from './constants/appConstants';
 
-// Create a simple, clean theme
+// Create a modern, professional theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1565c0', // Royal Blue
+      main: '#0f4c81',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#f57c00', // Orange
+      main: '#f9a825',
+      contrastText: '#1f2933',
     },
     background: {
-      default: '#fafafa',
+      default: '#f4f7fb',
+      paper: '#ffffff',
     },
+    text: {
+      primary: '#1f2933',
+      secondary: '#4b5563',
+    },
+    divider: '#e5e7eb',
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: 'Inter, Roboto, Helvetica, Arial, sans-serif',
     h5: {
       fontWeight: 700,
+      letterSpacing: '0.01em',
     },
     h6: {
-      fontWeight: 600,
+      fontWeight: 700,
+    },
+    body1: {
+      color: '#374151',
     },
   },
+  shape: {
+    borderRadius: 16,
+  },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: '#eef2f7',
+          minHeight: '100vh',
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          borderRadius: 8,
+          borderRadius: 10,
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        rounded: {
+          borderRadius: 20,
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          borderRadius: 20,
+          boxShadow: '0 16px 40px rgba(15, 23, 42, 0.08)',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: '0 8px 24px rgba(15, 23, 42, 0.12)',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            borderRadius: 12,
+          },
         },
       },
     },

@@ -58,15 +58,19 @@ const LoginPage = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: '#e3f2fd',
+        bgcolor: '#edf2f7',
+        px: 2,
       }}
     >
       <Card
         sx={{
           width: '100%',
-          maxWidth: 400,
-          p: 2,
-          boxShadow: 3,
+          maxWidth: 420,
+          p: 3,
+          boxShadow: '0 20px 50px rgba(15,23,42,0.12)',
+          borderRadius: 24,
+          border: '1px solid rgba(15,23,42,0.08)',
+          background: '#ffffff',
         }}
       >
         <CardContent>
@@ -77,7 +81,7 @@ const LoginPage = () => {
               {APP_TITLE}
             </Typography>
             <Typography variant="body2" color="text.secondary" mt={0.5}>
-              Admin Portal — Sign in to continue
+              Admin portal for reward management and customer performance.
             </Typography>
           </Box>
 
