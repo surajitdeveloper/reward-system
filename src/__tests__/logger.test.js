@@ -6,7 +6,7 @@
 import logger from '../utils/logger';
 
 describe('Logger Utility', () => {
-  let spyInfo, spyWarn, spyError, spyDebug, spyGroup, spyGroupEnd;
+  let spyInfo, spyWarn, spyError, spyDebug, spyGroup;
 
   beforeEach(() => {
     spyInfo = jest.spyOn(console, 'info').mockImplementation(() => {});
@@ -14,7 +14,6 @@ describe('Logger Utility', () => {
     spyError = jest.spyOn(console, 'error').mockImplementation(() => {});
     spyDebug = jest.spyOn(console, 'debug').mockImplementation(() => {});
     spyGroup = jest.spyOn(console, 'groupCollapsed').mockImplementation(() => {});
-    spyGroupEnd = jest.spyOn(console, 'groupEnd').mockImplementation(() => {});
   });
 
   afterEach(() => {
