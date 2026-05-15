@@ -3,21 +3,13 @@
  * Overview dashboard showing summary stats and top customers.
  */
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import PeopleIcon from '@mui/icons-material/People';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -27,7 +19,6 @@ import {
 } from 'recharts';
 import useTransactions from '../hooks/useTransactions';
 import useCustomers from '../hooks/useCustomers';
-import CustomerDetailsDialog from '../components/customers/CustomerDetailsDialog';
 import { calculateTotalPoints } from '../utils/rewardCalculator';
 import { CHART_COLORS } from '../constants/appConstants';
 
@@ -51,9 +42,6 @@ const StatCard = ({ title, value, icon, color }) => (
 const DashboardPage = () => {
   const { transactionData, loading: txnLoading, error: txnError } = useTransactions();
   const { customers, loading: custLoading, error: custError } = useCustomers();
-  const [selectedTier, setSelectedTier] = useState(null);
-  const [selectedCustomerId, setSelectedCustomerId] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
 
   // Compute summary stats
   const stats = useMemo(() => {
@@ -81,30 +69,7 @@ const DashboardPage = () => {
     return { totalPoints, totalTxns, top8, customerPoints };
   }, [transactionData]);
 
-  const tierCustomers = useMemo(() => {
-    if (!selectedTier || !customers || !stats?.customerPoints) return [];
-    return customers
-      .filter((customer) => customer?.tier === selectedTier)
-      .map((customer) => ({
-        ...customer,
-        points: stats.customerPoints.find((item) => item.customerId === customer.customerId)?.points || 0,
-      }))
-      .sort((a, b) => b.points - a.points);
-  }, [selectedTier, customers, stats]);
-
   const loading = txnLoading || custLoading;
-
-  const selectedCustomer = customers?.find((customer) => customer.customerId === selectedCustomerId);
-  const selectedTransactions = transactionData?.find((record) => record.customerId === selectedCustomerId)?.transactions || [];
-
-  const handleOpenCustomerDetails = (customerId) => {
-    setSelectedCustomerId(customerId);
-    setDialogOpen(true);
-  };
-
-  const handleCloseCustomerDetails = () => {
-    setDialogOpen(false);
-  };
 
   if (loading) {
     return (
